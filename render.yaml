@@ -5,11 +5,13 @@ services:
     plan: free
     repo: https://github.com/aswin3112sand/quizapp1
     branch: main
-    buildCommand: mvn -B clean package
-    startCommand: java -jar target/quizapp-0.0.1-SNAPSHOT.jar
+
+    buildCommand: mvn -B clean package -DskipTests
+    startCommand: java -jar target/*.jar
+
     envVars:
       - key: SPRING_PROFILES_ACTIVE
-        value: dev
+        value: prod
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: quizapp-db
@@ -26,6 +28,9 @@ services:
         value: org.postgresql.Driver
       - key: SPRING_JPA_HIBERNATE_DDL_AUTO
         value: update
+      - key: PORT
+        value: 8080
+
 databases:
   - name: quizapp-db
     databaseName: quizapp
