@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Online Quiz – Home')}"></head>
+<body data-bs-theme="dark" class="page-index">
+  <img src="/img/bg1.jpg" th:src="@{/img/bg1.jpg}" class="bg-img bg1" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg2.jpg" th:src="@{/img/bg2.jpg}" class="bg-img bg2" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg3.jpg" th:src="@{/img/bg3.jpg}" class="bg-img bg3" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg4.jpg" th:src="@{/img/bg4.jpg}" class="bg-img bg4" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg5.jpg" th:src="@{/img/bg5.jpg}" class="bg-img bg5" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg6.jpg" th:src="@{/img/bg6.jpg}" class="bg-img bg6" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg7.jpg" th:src="@{/img/bg7.jpg}" class="bg-img bg7" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg8.jpg" th:src="@{/img/bg8.jpg}" class="bg-img bg8" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg9.jpg" th:src="@{/img/bg9.jpg}" class="bg-img bg9" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg10.jpg" th:src="@{/img/bg10.jpg}" class="bg-img bg10" alt="" loading="lazy" decoding="async" />
+
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+  <main class="container">
+    <section class="hero-shell" data-reveal="up">
+      <div class="glass card-premium hero-card hero-card--welcome" data-tilt="12">
+        <p class="badge-soft mb-2">Power up your streak</p>
+        <h1 class="hero-title">Welcome to quiz</h1>
+        <p class="text-muted mb-4">
+          Create custom challenges, compare with friends, மற்றும் உங்கள் prep-ஐ lightning வேகத்தில் மேம்படுத்துங்கள்.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary neon" th:href="@{/quiz}" data-ripple data-shimmer>Start a quiz</a>
+          <a class="btn btn-outline glass" th:href="@{/leaderboard}" data-ripple>View leaderboard</a>
+        </div>
+        <div class="hero-stats mt-4">
+          <div>
+            <strong>120+</strong>
+            <small>Daily attempts</small>
+          </div>
+          <div>
+            <strong>4.8★</strong>
+            <small>Mentor rating</small>
+          </div>
+          <div>
+            <strong>25</strong>
+            <small>Active quizzes</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+      <div class="container">
+        <div class="row g-4 mt-1">
+          <!-- Card 1 -->
+          <div class="col-12 col-lg-4">
+            <article class="feature-card feature-card--mini h-100 shadow-sm" role="article" aria-label="Smart Analytics">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon" aria-hidden="true">
+                  <i class="bi bi-graph-up-arrow fs-1"></i>
+                </div>
+                <div>
+                  <h3 class="feature-title h5 mb-2">Smart Analytics</h3>
+                  <p class="feature-text mb-0">
+                    <strong>Track your quiz scores, speed & accuracy in one view.</strong><br>
+                    <span class="text-secondary">உங்கள் மதிப்பெண்கள், வேகம், துல்லியம் — அனைத்தும் ஒரே பார்வையில்!</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 2 (Tamil only) -->
+          <div class="col-12 col-lg-4">
+            <article class="feature-card feature-card--mini h-100 shadow-sm" role="article" aria-label="Quiz Fun Zone">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon" aria-hidden="true">
+                  <i class="bi bi-puzzle fs-1"></i>
+                </div>
+                <div>
+                  <h3 class="feature-title h5 mb-2">Quiz Fun Zone</h3>
+                  <p class="feature-text mb-0">
+                    <strong>Learn through fun — every question a new challenge!</strong><br>
+                    <span class="text-secondary">கேள்வி தோறும் புதிய சவால், கற்றல் ஒரு விளையாட்டு!</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-12 col-lg-4">
+            <article class="feature-card feature-card--mini h-100 shadow-sm" role="article" aria-label="Progress Tracker">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon" aria-hidden="true">
+                  <i class="bi bi-rocket-takeoff fs-1"></i>
+                </div>
+                <div>
+                  <h3 class="feature-title h5 mb-2">Progress Tracker</h3>
+                  <p class="feature-text mb-0">
+                    <strong>See your streaks, badges & daily growth instantly.</strong><br>
+                    <span class="text-secondary">உங்கள் முன்னேற்றம், பேட்ஜ்கள், தினசரி வளர்ச்சி — ஒரே இடத்தில்!</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+  <!-- why: optional enhancements -->
+  <script src="../static/js/app.js" th:src="@{/js/app.js}" defer></script>
+</body>
+</html>

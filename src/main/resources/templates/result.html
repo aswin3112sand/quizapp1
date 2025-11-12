@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Aswin Quiz – Result')}"></head>
+<body data-bs-theme="dark" class="page-results">
+  <img src="/img/bg1.jpg" th:src="@{/img/bg1.jpg}" class="bg-img bg1" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg2.jpg" th:src="@{/img/bg2.jpg}" class="bg-img bg2" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg3.jpg" th:src="@{/img/bg3.jpg}" class="bg-img bg3" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg4.jpg" th:src="@{/img/bg4.jpg}" class="bg-img bg4" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg5.jpg" th:src="@{/img/bg5.jpg}" class="bg-img bg5" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg6.jpg" th:src="@{/img/bg6.jpg}" class="bg-img bg6" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg7.jpg" th:src="@{/img/bg7.jpg}" class="bg-img bg7" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg8.jpg" th:src="@{/img/bg8.jpg}" class="bg-img bg8" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg9.jpg" th:src="@{/img/bg9.jpg}" class="bg-img bg9" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg10.jpg" th:src="@{/img/bg10.jpg}" class="bg-img bg10" alt="" loading="lazy" decoding="async" />
+
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+  <main class="container py-5">
+    <section class="glass card-premium results-hero" data-reveal="up">
+      <div class="confetti-layer" aria-hidden="true"></div>
+      <p class="badge-soft">Great effort</p>
+      <h1 class="hero-title mb-3" th:text="${quiz != null ? quiz.title : 'Your quiz'}">Quiz</h1>
+      <div class="score-ring">
+        <div class="score-value" th:text="${percentage + '%'}">90%</div>
+        <small class="text-muted">Score</small>
+      </div>
+      <p class="text-muted mb-4">
+        You answered <span th:text="${score}">0</span> out of <span th:text="${total}">0</span> questions correctly.
+      </p>
+      <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+        <a class="btn btn-primary neon" th:href="@{/quiz}" data-ripple data-shimmer>Retry quiz</a>
+        <a class="btn btn-outline glass" th:href="@{/leaderboard}" data-ripple>View leaderboard</a>
+      </div>
+    </section>
+  </main>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+  <script src="../static/js/app.js" th:src="@{/js/app.js}" defer></script>
+</body>
+</html>

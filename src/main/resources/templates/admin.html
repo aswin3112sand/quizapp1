@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Aswin Quiz – Admin')}"></head>
+<body data-bs-theme="dark" class="page-admin">
+  <img src="/img/bg1.jpg" th:src="@{/img/bg1.jpg}" class="bg-img bg1" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg2.jpg" th:src="@{/img/bg2.jpg}" class="bg-img bg2" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg3.jpg" th:src="@{/img/bg3.jpg}" class="bg-img bg3" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg4.jpg" th:src="@{/img/bg4.jpg}" class="bg-img bg4" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg5.jpg" th:src="@{/img/bg5.jpg}" class="bg-img bg5" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg6.jpg" th:src="@{/img/bg6.jpg}" class="bg-img bg6" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg7.jpg" th:src="@{/img/bg7.jpg}" class="bg-img bg7" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg8.jpg" th:src="@{/img/bg8.jpg}" class="bg-img bg8" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg9.jpg" th:src="@{/img/bg9.jpg}" class="bg-img bg9" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg10.jpg" th:src="@{/img/bg10.jpg}" class="bg-img bg10" alt="" loading="lazy" decoding="async" />
+
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+  <main class="container py-5">
+    <section class="glass card-premium" data-reveal="up">
+      <div class="d-flex justify-content-between flex-wrap gap-3 mb-3">
+        <div>
+          <p class="badge-soft mb-1">Admin panel</p>
+          <h1 class="h4 mb-0">Manage Content</h1>
+          <small class="text-muted" th:text="${quiz.title}">Quiz name</small>
+        </div>
+        <a class="btn btn-outline glass" th:href="@{/quiz}" data-ripple>Back to quiz</a>
+      </div>
+      <p class="text-muted mb-4">Use the quick actions to curate questions or monitor performance.</p>
+      <div class="d-flex flex-column flex-md-row gap-3">
+        <a class="btn btn-primary neon flex-fill" th:href="@{/admin/questions}" data-ripple data-shimmer>Manage Questions</a>
+        <a class="btn btn-outline glass flex-fill" th:href="@{/leaderboard}" data-ripple>View Leaderboard</a>
+      </div>
+    </section>
+  </main>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+  <script src="../static/js/app.js" th:src="@{/js/app.js}" defer></script>
+</body>
+</html>

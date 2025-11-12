@@ -1,0 +1,27 @@
+# Maven build output
+target/
+
+# Logs and temp files
+*.log
+*.tmp
+*.out
+hs_err_pid*
+
+# IDE/editor artifacts
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment overrides
+.env
+
+# Package archives
+*.jar
+*.war
+*.ear

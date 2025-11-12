@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${q.id} != null ? 'Edit Question' : 'New Question')}"></head>
+<body data-bs-theme="dark" class="page-admin">
+  <img src="/img/bg1.jpg" th:src="@{/img/bg1.jpg}" class="bg-img bg1" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg2.jpg" th:src="@{/img/bg2.jpg}" class="bg-img bg2" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg3.jpg" th:src="@{/img/bg3.jpg}" class="bg-img bg3" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg4.jpg" th:src="@{/img/bg4.jpg}" class="bg-img bg4" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg5.jpg" th:src="@{/img/bg5.jpg}" class="bg-img bg5" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg6.jpg" th:src="@{/img/bg6.jpg}" class="bg-img bg6" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg7.jpg" th:src="@{/img/bg7.jpg}" class="bg-img bg7" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg8.jpg" th:src="@{/img/bg8.jpg}" class="bg-img bg8" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg9.jpg" th:src="@{/img/bg9.jpg}" class="bg-img bg9" alt="" loading="lazy" decoding="async" />
+  <img src="/img/bg10.jpg" th:src="@{/img/bg10.jpg}" class="bg-img bg10" alt="" loading="lazy" decoding="async" />
+
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+  <main class="container py-5">
+    <section class="glass card-premium" data-reveal="up">
+      <div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+        <div>
+          <p class="badge-soft mb-1" th:text="${quiz.title}">Quiz</p>
+          <h1 class="h4 mb-0" th:text="${q.id} != null ? 'Edit question' : 'New question'">New question</h1>
+          <small class="text-muted">Fill four options and set the correct index (0-3).</small>
+        </div>
+        <a class="btn btn-outline glass btn-backlist" th:href="@{/admin/questions}" data-ripple>Back to list</a>
+      </div>
+
+      <form th:action="${q.id} != null ? @{'/admin/questions/' + ${q.id}} : @{/admin/questions}"
+            method="post"
+            class="form-stack"
+            novalidate>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <div class="field-floating">
+          <textarea class="form-control" name="text" rows="2" placeholder=" " required data-float
+                    th:text="${q.text}"></textarea>
+          <label>Question text</label>
+        </div>
+        <div class="row g-3">
+          <div class="col-12 col-md-6" th:each="idx : ${#numbers.sequence(0,3)}">
+            <div class="field-floating">
+              <input class="form-control"
+                     type="text"
+                     th:name="${'option' + (idx + 1)}"
+                     placeholder=" "
+                     required
+                     data-float
+                     th:value="${#lists.size(q.options) > idx ? q.options.get(idx) : ''}">
+              <label th:text="'Option ' + (idx + 1)">Option</label>
+            </div>
+          </div>
+        </div>
+        <div class="field-floating">
+          <input class="form-control" type="number" name="correctIndex" min="0" max="3" placeholder=" "
+                 th:value="${q.correctIndex}" required data-float>
+          <label>Correct option index (0-3)</label>
+        </div>
+        <div class="d-flex flex-column flex-md-row gap-3 mt-4">
+          <button class="btn btn-primary neon flex-fill" type="submit" data-ripple data-shimmer>Save question</button>
+          <a class="btn btn-outline glass flex-fill" th:href="@{/admin/questions}" data-ripple>Cancel</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+  <script src="../static/js/app.js" th:src="@{/js/app.js}" defer></script>
+</body>
+</html>
