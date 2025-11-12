@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: quizapp1
+    env: java
+    plan: free
+    repo: https://github.com/aswin3112sand/quizapp1
+    branch: main
+    buildCommand: mvn -B clean package
+    startCommand: java -jar target/quizapp-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: dev
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: quizapp-db
+          property: jdbcConnectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: quizapp-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: quizapp-db
+          property: password
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.postgresql.Driver
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+databases:
+  - name: quizapp-db
+    databaseName: quizapp
+    plan: free
