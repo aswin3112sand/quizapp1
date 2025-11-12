@@ -1,13 +1,12 @@
 services:
   - type: web
     name: quizapp1
-    env: java
+    runtime: docker
     plan: free
     repo: https://github.com/aswin3112sand/quizapp1
     branch: main
-
-    buildCommand: mvn -B clean package -DskipTests
-    startCommand: java -jar target/*.jar
+    dockerContext: .
+    dockerfilePath: Dockerfile
 
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -15,7 +14,7 @@ services:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: quizapp-db
-          property: jdbcConnectionString
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: quizapp-db
