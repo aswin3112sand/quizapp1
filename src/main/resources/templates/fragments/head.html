@@ -1,6 +1,11 @@
 <head xmlns:th="http://www.thymeleaf.org" th:fragment="head(pageTitle='Aswin Quiz')">
   <meta charset="UTF-8" />
+  <!-- viewport intentionally excludes maximum-scale/user-scalable for accessibility -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#05060a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="msapplication-navbutton-color" content="#05060a" />
   <meta name="description" content="Aswin Quiz – bilingual quizzes with instant insights." />
   <title th:text="${pageTitle}">Aswin Quiz</title>
 
