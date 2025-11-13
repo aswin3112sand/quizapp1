@@ -804,6 +804,11 @@ main.container {
   opacity: 1;
 }
 
+.backdrop-blur {
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
 .auth-panel--form.glass {
   background:
     linear-gradient(145deg, rgba(99, 213, 255, 0.18), rgba(124, 93, 255, 0.12)) padding-box,

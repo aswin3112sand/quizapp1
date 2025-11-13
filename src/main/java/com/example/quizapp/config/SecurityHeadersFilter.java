@@ -16,9 +16,7 @@ public class SecurityHeadersFilter extends OncePerRequestFilter {
                                   HttpServletResponse response,
                                   FilterChain filterChain)
       throws ServletException, IOException {
-    response.setHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
-    response.setHeader("Pragma", "no-cache");
-    response.setHeader("Expires", "0");
+    response.setHeader("Cache-Control", "no-cache, max-age=0, stale-while-revalidate=0");
     response.setHeader("X-Content-Type-Options", "nosniff");
     filterChain.doFilter(request, response);
   }
