@@ -54,8 +54,10 @@
         list.appendChild(li);
       });
     }
+    const apiBase = window.location.origin;
+
     function loadInitial() {
-      fetch('/api/leaderboard')
+      fetch(apiBase + '/api/leaderboard')
         .then(resp => resp.json())
         .then(render)
         .catch(() => render([]));
