@@ -29,7 +29,7 @@ public class SecurityConfig {
       .headers(headers -> headers
         .frameOptions(frame -> frame.disable()))
       .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/login", "/register",
+        .requestMatchers("/", "/login", "/register",
                          "/css/**", "/js/**", "/images/**",
                          "/webjars/**", "/favicon.ico",
                          "/ws/**", "/api/**", "/h2/**", "/error").permitAll()

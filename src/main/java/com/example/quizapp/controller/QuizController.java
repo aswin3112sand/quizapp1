@@ -21,16 +21,18 @@ public class QuizController {
     }
 
     @GetMapping("/")
-    public String home(Authentication authentication) {
-        if (authentication == null
-                || !authentication.isAuthenticated()
-                || authentication instanceof AnonymousAuthenticationToken) {
-            return "redirect:/login";
+    public String home(Authentication authentication, Model model) {
+        boolean isAuthenticated = authentication != null
+                && authentication.isAuthenticated()
+                && !(authentication instanceof AnonymousAuthenticationToken);
+        model.addAttribute("isAuthenticated", isAuthenticated);
+        if (isAuthenticated) {
+            boolean isAdmin = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .anyMatch("ROLE_ADMIN"::equals);
+            model.addAttribute("isAdmin", isAdmin);
         }
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .anyMatch("ROLE_ADMIN"::equals);
-        return isAdmin ? "redirect:/admin" : "redirect:/quiz/home";
+        return "index";
     }
 
     @GetMapping("/quiz/home")
