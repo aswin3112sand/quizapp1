@@ -37,7 +37,7 @@ public class QuizController {
 
     @GetMapping("/quiz/home")
     public String quizHome() {
-        return "index";
+        return "redirect:/quiz";
     }
 
     @GetMapping("/quiz")

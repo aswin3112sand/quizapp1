@@ -25,7 +25,7 @@ public class SecurityConfig {
     http
       .userDetailsService(customUserDetailsService)
       .csrf(csrf -> csrf
-        .ignoringRequestMatchers("/ws/**", "/h2/**"))
+        .ignoringRequestMatchers("/ws/**", "/h2/**", "/admin/questions/delete/**"))
       .headers(headers -> headers
         .frameOptions(frame -> frame.disable()))
       .authorizeHttpRequests(auth -> auth
@@ -56,7 +56,7 @@ public class SecurityConfig {
     return (request, response, authentication) -> {
       boolean isAdmin = authentication.getAuthorities().stream()
           .anyMatch(granted -> "ROLE_ADMIN".equals(granted.getAuthority()));
-      String target = isAdmin ? "/admin" : "/quiz/home";
+      String target = isAdmin ? "/admin" : "/quiz";
       if (!response.isCommitted()) {
         response.sendRedirect(target);
       }

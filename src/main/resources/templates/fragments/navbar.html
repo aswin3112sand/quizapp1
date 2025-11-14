@@ -17,7 +17,7 @@
     </label>
 
     <div class="nav-menu" id="navMenu">
-      <div class="nav-links" sec:authorize="isAuthenticated()">
+      <div class="nav-links">
         <a th:href="@{/quiz}" href="/quiz">Quizzes</a>
         <a th:href="@{/leaderboard}" href="/leaderboard">Leaderboard</a>
         <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}" href="/admin">Admin</a>

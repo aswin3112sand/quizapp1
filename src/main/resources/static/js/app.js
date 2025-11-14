@@ -1,3 +1,6 @@
+// mark JS availability early so CSS fallbacks stay visible without scripts
+document.documentElement.classList.add('js');
+
 // fade.js – பக்கம் மெதுவாக தோன்ற
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('is-ready');
@@ -24,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // reveal.js – எலெமெண்ட்கள் மெதுவாக மேலே வர
+  const revealNodes = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries, io) => {
       entries.forEach((entry) => {
@@ -32,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         io.unobserve(entry.target);
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('[data-reveal]').forEach((node) => observer.observe(node));
+    revealNodes.forEach((node) => observer.observe(node));
+  } else {
+    revealNodes.forEach((node) => node.classList.add('reveal-active'));
   }
 
   // float-label.js – தட்டச்சு செய்ததும் லேபல் மேலே போக

@@ -1,6 +1,6 @@
 package com.example.quizapp;
 
-import com.example.quizapp.model.Question;
+import com.example.quizapp.config.DefaultQuizData;
 import com.example.quizapp.model.Quiz;
 import com.example.quizapp.model.Role;
 import com.example.quizapp.model.User;
@@ -13,8 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
-
 @SpringBootApplication
 public class QuizAppApplication {
 
@@ -25,41 +23,11 @@ public class QuizAppApplication {
     @Bean
     CommandLineRunner seedQuiz(QuizRepository quizzes, QuestionRepository questions) {
         return args -> {
-            Quiz quiz = quizzes.findBySlug("general-knowledge")
-                    .orElseGet(() -> quizzes.save(new Quiz(
-                            "General Knowledge",
-                            "general-knowledge",
-                            "Starter quiz from the GUVI tutorial",
-                            180
-                    )));
+            Quiz quiz = quizzes.findBySlug(DefaultQuizData.DEFAULT_SLUG)
+                    .orElseGet(() -> quizzes.save(DefaultQuizData.buildDefaultQuiz()));
 
             if (questions.countByQuiz(quiz) == 0) {
-                questions.saveAll(List.of(
-                        new Question(
-                                "What is the capital of France?",
-                                List.of("Berlin", "Madrid", "Paris", "Rome"),
-                                2,
-                                quiz
-                        ),
-                        new Question(
-                                "2 + 2 = ?",
-                                List.of("3", "4", "5", "22"),
-                                1,
-                                quiz
-                        ),
-                        new Question(
-                                "Which language runs in a web browser?",
-                                List.of("C", "Java", "Python", "JavaScript"),
-                                3,
-                                quiz
-                        ),
-                        new Question(
-                                "Spring Data JPA is used for ____.",
-                                List.of("Security", "Database access", "UI Styling", "Caching"),
-                                1,
-                                quiz
-                        )
-                ));
+                questions.saveAll(DefaultQuizData.buildQuestions(quiz));
                 System.out.println("✅ Seeded default quiz and questions.");
             }
         };

@@ -1,5 +1,6 @@
 package com.example.quizapp.service;
 
+import com.example.quizapp.config.DefaultQuizData;
 import com.example.quizapp.dto.LeaderboardEntry;
 import com.example.quizapp.model.Question;
 import com.example.quizapp.model.Quiz;
@@ -9,6 +10,7 @@ import com.example.quizapp.repository.QuestionRepository;
 import com.example.quizapp.repository.QuizRepository;
 import com.example.quizapp.repository.ResultRepository;
 import com.example.quizapp.repository.UserRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,7 +28,7 @@ import java.util.regex.Pattern;
 @Service
 public class QuizService {
 
-    private static final String DEFAULT_QUIZ_SLUG = "general-knowledge";
+    private static final String DEFAULT_QUIZ_SLUG = DefaultQuizData.DEFAULT_SLUG;
     private static final Pattern ANSWER_KEY_PATTERN = Pattern.compile("answers\\[(\\d+)]");
     private static final DateTimeFormatter LEADERBOARD_TS = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -48,10 +50,10 @@ public class QuizService {
         this.messagingTemplate = messagingTemplate;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Quiz getDefaultQuiz() {
         return quizRepository.findBySlug(DEFAULT_QUIZ_SLUG)
-                .orElseThrow(() -> new IllegalStateException("Default quiz not configured"));
+                .orElseGet(this::createDefaultQuizWithQuestions);
     }
 
     @Transactional(readOnly = true)
@@ -138,5 +140,19 @@ public class QuizService {
                         result.getCreatedAt().format(LEADERBOARD_TS)
                 ))
                 .toList();
+    }
+
+    private Quiz createDefaultQuizWithQuestions() {
+        try {
+            Quiz quiz = DefaultQuizData.buildDefaultQuiz();
+            Quiz saved = quizRepository.save(quiz);
+            if (questionRepository.countByQuiz(saved) == 0) {
+                questionRepository.saveAll(DefaultQuizData.buildQuestions(saved));
+            }
+            return saved;
+        } catch (DataIntegrityViolationException e) {
+            return quizRepository.findBySlug(DEFAULT_QUIZ_SLUG)
+                    .orElseThrow(() -> new IllegalStateException("Default quiz not configured", e));
+        }
     }
 }

@@ -134,16 +134,47 @@ body::after {
   box-shadow: 0 0 55px hsl(var(--light1) / 0.4);
 }
 
-.bg1 { top: 5%; left: 8%; width: 320px; animation: floatXY 18s ease-in-out infinite; }
-.bg2 { top: 12%; right: 10%; width: 380px; animation: floatXY 20s ease-in-out infinite reverse; }
-.bg3 { top: 55%; left: 5%; width: 300px; animation: floatXY 17s ease-in-out infinite; }
-.bg4 { bottom: 10%; right: 8%; width: 320px; animation: floatXY 19s ease-in-out infinite reverse; }
-.bg5 { top: 30%; left: 35%; width: 340px; animation: floatXY 21s ease-in-out infinite; }
-.bg6 { bottom: 25%; right: 30%; width: 360px; animation: floatXY 19s ease-in-out infinite; }
-.bg7 { top: 70%; left: 20%; width: 300px; animation: floatXY 22s ease-in-out infinite reverse; }
-.bg8 { top: 15%; right: 45%; width: 280px; animation: floatXY 20s ease-in-out infinite; }
-.bg9 { bottom: 15%; left: 50%; width: 320px; animation: floatXY 18s ease-in-out infinite reverse; }
-.bg10 { top: 45%; right: 5%; width: 280px; animation: floatXY 23s ease-in-out infinite; }
+ .bg1 { top: 5%; left: 8%; width: 320px; animation: floatXY 18s ease-in-out infinite; }
+ .bg2 { top: 12%; right: 10%; width: 380px; animation: floatXY 20s ease-in-out infinite reverse; }
+ .bg3 { top: 55%; left: 5%; width: 300px; animation: floatXY 17s ease-in-out infinite; }
+ .bg4 { bottom: 10%; right: 8%; width: 320px; animation: floatXY 19s ease-in-out infinite reverse; }
+ .bg5 { top: 30%; left: 35%; width: 340px; animation: floatXY 21s ease-in-out infinite; }
+ .bg6 { bottom: 25%; right: 30%; width: 360px; animation: floatXY 19s ease-in-out infinite; }
+ .bg7 { top: 70%; left: 20%; width: 300px; animation: floatXY 22s ease-in-out infinite reverse; }
+ .bg8 { top: 15%; right: 45%; width: 280px; animation: floatXY 20s ease-in-out infinite; }
+ .bg9 { bottom: 15%; left: 50%; width: 320px; animation: floatXY 18s ease-in-out infinite reverse; }
+ .bg10 { top: 45%; right: 5%; width: 280px; animation: floatXY 23s ease-in-out infinite; }
+ 
+ .page-quiz .bg-img {
+   inset: 0;
+   width: 100vw;
+   height: 100vh;
+   border-radius: 0;
+   object-fit: cover;
+   opacity: 0.18;
+   mix-blend-mode: screen;
+   filter: saturate(1.15) contrast(1.1) brightness(1.08);
+   box-shadow: none;
+   animation: bgPulse 28s ease-in-out infinite alternate;
+ }
+ 
+ .page-quiz .bg-img:nth-of-type(odd) {
+   mix-blend-mode: lighten;
+   opacity: 0.24;
+   animation-duration: 32s;
+ }
+ 
+ .page-quiz .bg-img:nth-of-type(3n) {
+   mix-blend-mode: soft-light;
+   opacity: 0.16;
+   animation-duration: 24s;
+ }
+ 
+ .page-quiz .bg-img:nth-of-type(5n) {
+   mix-blend-mode: color-dodge;
+   opacity: 0.22;
+   animation-duration: 35s;
+ }
 
 .quiz-hero {
   background:
@@ -299,6 +330,12 @@ body::after {
 @keyframes floatXY {
   0% { transform: translate3d(-1.2%, -0.8%, 0); }
   100% { transform: translate3d(1.2%, 0.8%, 0); }
+}
+
+@keyframes bgPulse {
+  0% { transform: scale(1) translateY(0); opacity: 0.15; }
+  50% { transform: scale(1.05) translateY(-1.2%); opacity: 0.25; }
+  100% { transform: scale(1) translateY(0); opacity: 0.15; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1210,10 +1247,19 @@ textarea::placeholder {
 }
 
 /* quiz */
+.page-quiz [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
 .question-stack {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
 }
 
 .glass.question-stack {
@@ -1498,12 +1544,17 @@ textarea::placeholder {
 
 /* reveal */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(18px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-[data-reveal].reveal-active {
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+html.js [data-reveal].reveal-active {
   opacity: 1;
   transform: none;
 }
