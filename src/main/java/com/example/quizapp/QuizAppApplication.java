@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
@@ -21,6 +22,7 @@ public class QuizAppApplication {
     }
 
     @Bean
+    @Profile("!test")
     CommandLineRunner seedQuiz(QuizRepository quizzes, QuestionRepository questions) {
         return args -> {
             Quiz quiz = quizzes.findBySlug(DefaultQuizData.DEFAULT_SLUG)
@@ -34,6 +36,7 @@ public class QuizAppApplication {
     }
 
     @Bean
+    @Profile("!test")
     CommandLineRunner seedAdmin(UserRepository users, PasswordEncoder encoder) {
         return args -> {
             users.findByEmailIgnoreCase("admin3112@gmail.com").ifPresentOrElse(existing -> {
